@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-struct FlagImage: View {
-    var name : String
-    
-    var body: some View {
-        Image(name)
-            .renderingMode(.original)
-            .clipShape(Capsule())
-            .shadow(radius: 5)
+struct TitleModifier : ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle.weight(.bold))
+            .foregroundColor(.white)
+    }
+}
+
+extension View {
+    func title() -> some View {
+        modifier(TitleModifier())
     }
 }
 
@@ -41,8 +44,8 @@ struct ContentView: View {
             VStack {
                 Spacer()
                 Text("Guess the flag!")
-                    .font(.largeTitle.weight(.bold))
-                    .foregroundColor(.white)
+                    .title()
+
                 
                 VStack (spacing: 15) {
                     VStack {
